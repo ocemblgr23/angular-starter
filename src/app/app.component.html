@@ -1,3 +1,47 @@
-<main class="d-flex align-items-center justify-content-center">
+<main class="d-flex align-items-center flex-wrap justify-content-center">
+  <section>
+    <div class="container">
+      <div class="row g-3">
+        <div class="col">
+          <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+            <input type="text"  formControlName="name" class="form-control mb-2" placeholder="Full Name" aria-label="First name">
+            <!-- Other form controls... -->
+            <!-- <input formControlName="name" placeholder="Customer Name"> -->
+            <!-- ... -->
+            <!-- FormArray example -->
+            <div  formArrayName="addresses">
+              <div class="d-flex flex-column gap-4" *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
+                <div class="card p-2">
+                  <div class="form-group">
+                    <input class="form-control mb-2" formControlName="street" placeholder="Street">
+                    <input class="form-control mb-2" formControlName="city" placeholder="City">
+                  </div>
+                  <div class="form-group d-flex gap-2 ">
+                    <button class="btn btn-outline-danger  " type="button" (click)="removeAddress(i)"><i class="bi bi-folder-minus"></i></button>
+                    <button type="button" class="btn btn-outline-success " (click)="addAddress()"><i class="bi bi-folder-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group d-flex align-items-center justify-content-center  mt-2">
+              <button class="btn btn-success " type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col">
+          <div class="d-flex h-50 justify-content-center ">
+            <div class="lead fs-3 fst-italic ">
+              {{myForm.value | json}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
   <h1 class="display-1 p-1 text-primary">V1_Angular Starter Project with Bootstrap</h1>
 </main>
+
